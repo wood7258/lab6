@@ -6,17 +6,18 @@ $(function() {
 	
 	$('.signup-form').submit(function(){
 		var signupForm = $(this);
-		var addr1Input = signupForm.find('input[name="addr-1"]');
-		var addr1Value = addr1Input.val();
-		if(addr1Value.length == 0) {
-			alert('INPUT REQUIRED: ADDRESS\nPLEASE ADVISE.');
-			return false;
 		}
-		var zipInput = signupForm.find('input[name="zip"]');
-		var zipValue = zipInput.val();
-		if(zipValue.length == 0) {
-			alert('INPUT REQUIRED: ZIP CODE\nPLEASE ADVISE.');
-			return false;
+		var reqFields = ["first-name", "last-name", "addr-1", "zip", "email"];
+		var reqField;
+		var reqValue;
+		for (var i = 0; i < reqFields.length; i++) {
+			var fieldName = reqFields[i];
+			reqField = signupForm.find('input[name="' + fieldName + '"]');
+			reqValue = reqField.val().trim();
+			if (0 === reqValue.length) {
+				alert('You must enter your ' + reqField.attr('placeholder') + '!');
+				return false;
+			}
 		}
 	});
 	$('.cancel-signup').click(function(){
